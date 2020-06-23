@@ -14,15 +14,15 @@ struct Photo: Codable {
     let id: String
     let server: String
     let title: String
-    var imageUrl: URL {
-        return URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_c.jpg")!
+    var imageURL: URL {
+        return URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_m.jpg")!
     }
 }
 
-struct PhotoData: Codable{
+struct PhotoDataArray: Codable{
     let photo: [Photo]
 }
 
 struct PhotoResult: Codable {
-    let photos: PhotoData
+    let photos: PhotoDataArray
 }

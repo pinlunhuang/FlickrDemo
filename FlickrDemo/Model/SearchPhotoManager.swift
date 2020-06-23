@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SearchPhotoManagerDelegate {
-    func didUpdateSearchResult(_ weatherManager: SearchPhotoManager, photos: PhotoResult)
+    func didUpdateSearchResult(_ weatherManager: SearchPhotoManager, photoResult: PhotoResult)
     func didFailWithError(error: Error)
 }
 
@@ -20,6 +20,7 @@ struct SearchPhotoManager {
     
     func searchPhoto(keyword: String, perPage: String) {
         let url = "\(apiURL)&text=\(keyword)&per_page=\(perPage)&format=json&nojsoncallback=1"
+        print(url)
         sendRequest(with: url)
     }
     
@@ -35,7 +36,7 @@ struct SearchPhotoManager {
                 
                 if let responseData = data {
                     if let photoResult = self.parseJsonData(responseData) {
-                        self.delegate?.didUpdateSearchResult(self, photos: photoResult)
+                        self.delegate?.didUpdateSearchResult(self, photoResult: photoResult)
                     }
                 }
             }

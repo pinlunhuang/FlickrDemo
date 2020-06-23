@@ -19,6 +19,7 @@
 		E4CEE88E24A1AD0400F93550 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE88D24A1AD0400F93550 /* SceneDelegate.swift */; };
 		E4CEE89024A1B18600F93550 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE88F24A1B18600F93550 /* ResultViewController.swift */; };
 		E4CEE89224A1B57500F93550 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE89124A1B57500F93550 /* PhotoCell.swift */; };
+		E4CEE89524A1CF6600F93550 /* ImageRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE89424A1CF6600F93550 /* ImageRetriever.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		E4CEE88D24A1AD0400F93550 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E4CEE88F24A1B18600F93550 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		E4CEE89124A1B57500F93550 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		E4CEE89424A1CF6600F93550 /* ImageRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRetriever.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		E4CEE86A24A0B4A800F93550 /* FlickrDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E4CEE89324A1CEEF00F93550 /* Util */,
 				E4CEE88824A19CDE00F93550 /* Model */,
 				E4CEE88524A0B6DF00F93550 /* View */,
 				E4CEE88424A0B6CE00F93550 /* Controller */,
@@ -107,6 +110,14 @@
 				E4CEE88B24A19E0D00F93550 /* SearchPhotoManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E4CEE89324A1CEEF00F93550 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E4CEE89424A1CF6600F93550 /* ImageRetriever.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 				E4CEE89224A1B57500F93550 /* PhotoCell.swift in Sources */,
 				E4CEE88E24A1AD0400F93550 /* SceneDelegate.swift in Sources */,
 				E4CEE86C24A0B4A800F93550 /* AppDelegate.swift in Sources */,
+				E4CEE89524A1CF6600F93550 /* ImageRetriever.swift in Sources */,
 				E4CEE89024A1B18600F93550 /* ResultViewController.swift in Sources */,
 				E4CEE87624A0B4A800F93550 /* FlickrDemo.xcdatamodeld in Sources */,
 				E4CEE88724A0BE5D00F93550 /* SearchViewController.swift in Sources */,
