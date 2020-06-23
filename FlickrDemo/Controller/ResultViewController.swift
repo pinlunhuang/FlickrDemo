@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import JGProgressHUD
 
 class ResultViewController: UIViewController {
     
@@ -39,6 +41,7 @@ class ResultViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "搜尋結果: " + keyword
         searchPhotoManager.searchPhoto(keyword: self.keyword, perPage: self.perPage)
     }
     
@@ -49,6 +52,41 @@ class ResultViewController: UIViewController {
     func retriveMorePhoto() {
         self.page = self.page + 1
         searchPhotoManager.searchPhoto(keyword: self.keyword, perPage: String(Int(self.perPage)! * self.page))
+    }
+    
+    @objc func favoriteTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let favoriteTapped = tapGestureRecognizer.view as! UIImageView
+        
+        self.saveFavoritePhoto(index: favoriteTapped.tag)
+    }
+    
+    //MARK: - Core Data Operations
+    
+    func saveFavoritePhoto(index: Int) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let photoEntity = NSEntityDescription.entity(forEntityName: "FavoritePhoto", in: managedContext)!
+        
+        let favoritePhoto = NSManagedObject(entity: photoEntity, insertInto: managedContext)
+        favoritePhoto.setValue(self.resultPhotos[index].title, forKey: "title")
+        favoritePhoto.setValue(self.resultPhotos[index].imageURL.absoluteString, forKey: "imageURL")
+        ImageRetriever.downloadImage(url: self.resultPhotos[index].imageURL) { (image) in
+            favoritePhoto.setValue(image?.pngData(), forKey: "image")
+        }
+        
+        do {
+            try managedContext.save()
+            let hud = JGProgressHUD.init(style: .dark)
+            hud.textLabel.text = "已加入最愛"
+            hud.indicatorView = nil
+            hud.show(in: self.view)
+            hud.dismiss(afterDelay: 1.0)
+        } catch let error as NSError {
+          print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 
 }
@@ -64,12 +102,17 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let tapToAddFavorite = UITapGestureRecognizer(target: self, action: #selector(favoriteTapped(tapGestureRecognizer:)))
+        
         let cell = collectionView
         .dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         if !self.resultPhotos.isEmpty {
             let photo = resultPhotos[indexPath.item]
             cell.photoLabel.text = photo.title
             cell.imageURL = photo.imageURL
+            cell.favorite.tag = indexPath.item
+            cell.favorite.isUserInteractionEnabled = true
+            cell.favorite.addGestureRecognizer(tapToAddFavorite)
             
             ImageRetriever.downloadImage(url: cell.imageURL) { (image) in
                 if cell.imageURL == photo.imageURL, let image = image  {
@@ -84,8 +127,11 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == self.resultPhotos.count - 10 {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        
+        if maximumOffset - currentOffset <= -20 {
             retriveMorePhoto()
         }
     }

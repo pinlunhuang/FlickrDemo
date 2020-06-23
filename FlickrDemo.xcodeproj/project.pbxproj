@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		E4CEE89024A1B18600F93550 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE88F24A1B18600F93550 /* ResultViewController.swift */; };
 		E4CEE89224A1B57500F93550 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE89124A1B57500F93550 /* PhotoCell.swift */; };
 		E4CEE89524A1CF6600F93550 /* ImageRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEE89424A1CF6600F93550 /* ImageRetriever.swift */; };
+		E4CEE89E24A240FC00F93550 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = E4CEE89D24A240FC00F93550 /* JGProgressHUD */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4CEE89E24A240FC00F93550 /* JGProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +138,9 @@
 			dependencies = (
 			);
 			name = FlickrDemo;
+			packageProductDependencies = (
+				E4CEE89D24A240FC00F93550 /* JGProgressHUD */,
+			);
 			productName = FlickrDemo;
 			productReference = E4CEE86824A0B4A800F93550 /* FlickrDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -164,6 +169,9 @@
 				Base,
 			);
 			mainGroup = E4CEE85F24A0B4A800F93550;
+			packageReferences = (
+				E4CEE89C24A240FC00F93550 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+			);
 			productRefGroup = E4CEE86924A0B4A800F93550 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GSS8KW76YU;
 				INFOPLIST_FILE = FlickrDemo/Info.plist;
@@ -353,6 +362,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.pinlun.flickrDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -362,6 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GSS8KW76YU;
 				INFOPLIST_FILE = FlickrDemo/Info.plist;
@@ -371,6 +382,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.pinlun.flickrDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -398,6 +410,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4CEE89C24A240FC00F93550 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4CEE89D24A240FC00F93550 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4CEE89C24A240FC00F93550 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E4CEE87424A0B4A800F93550 /* FlickrDemo.xcdatamodeld */ = {
