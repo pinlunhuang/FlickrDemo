@@ -43,6 +43,7 @@ class SearchViewController: UIViewController {
     
     func checkTextFieldsIsEmpty() {
         self.searchButton.isEnabled = false
+        self.searchButton.alpha = 0.5
         searchKeywordInput.addTarget(self, action: #selector(textFieldsIsNotEmpty),
                                  for: .editingChanged)
         resultPerPageInput.addTarget(self, action: #selector(textFieldsIsNotEmpty),
@@ -62,9 +63,11 @@ class SearchViewController: UIViewController {
             let perPage = resultPerPageInput.text, !perPage.isEmpty
             else {
                 self.searchButton.isEnabled = false
+                self.searchButton.alpha = 0.5
                 return
             }
         self.searchButton.isEnabled = true
+        self.searchButton.alpha = 1
     }
     
     //MARK: - Segue Preparation
@@ -93,5 +96,15 @@ extension SearchViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == resultPerPageInput {
+            let allowedPerPage = NSCharacterSet(charactersIn: "0123456789")
+            let hasInput = CharacterSet(charactersIn: string)
+            return allowedPerPage.isSuperset(of: hasInput)
+        } else {
+            return true
+        }
     }
 }

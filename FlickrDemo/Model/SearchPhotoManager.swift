@@ -20,7 +20,6 @@ struct SearchPhotoManager {
     
     func searchPhoto(keyword: String, perPage: String) {
         let url = "\(apiURL)&text=\(keyword)&per_page=\(perPage)&format=json&nojsoncallback=1"
-        print(url)
         sendRequest(with: url)
     }
     

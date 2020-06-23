@@ -24,11 +24,11 @@
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="每頁呈現結果" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t3J-3D-Z9H">
                                 <rect key="frame" x="70" y="427.5" width="274" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WI-OW-oFo">
                                 <rect key="frame" x="70" y="491.5" width="274" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="搜尋"/>
                                 <connections>
                                     <action selector="searchClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RJ7-iX-wRt"/>
                                 </connections>
