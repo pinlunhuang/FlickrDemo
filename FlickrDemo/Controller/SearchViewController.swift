@@ -17,37 +17,58 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchKeywordInput.delegate = self
+        resultPerPageInput.delegate = self
         setUpView()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(tapGestureRecognizer:)))
         view.addGestureRecognizer(tap)
+        checkTextFieldsIsEmpty()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "搜尋照片"
-        
-//        searchButton.isEnabled = ((searchKeywordInput.text?.count ?? 0) > 0)
-//            && ((resultConfigPerPageInput.text?.count ?? 0) > 0)
-//        if searchButton.isEnabled {
-//            searchButton.alpha = 1
-//        } else {
-//            searchButton.alpha = 0.5
-//        }
     }
     
     @IBAction func searchClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "showSearchResult", sender: self)
     }
     
+    //MARK: - Custom func
+
     func setUpView() {
         searchButton.backgroundColor = #colorLiteral(red: 0.007509642746, green: 0.4820441008, blue: 0.9983070493, alpha: 1)
         searchButton.tintColor = .white
         searchButton.layer.cornerRadius = 5
     }
     
+    func checkTextFieldsIsEmpty() {
+        self.searchButton.isEnabled = false
+        searchKeywordInput.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                 for: .editingChanged)
+        resultPerPageInput.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                 for: .editingChanged)
+    }
+    
+    //MARK: - @objc custom func
+    
     @objc func dismissKeyboard(tapGestureRecognizer: UITapGestureRecognizer) {
         view.endEditing(true)
     }
     
+    @objc func textFieldsIsNotEmpty(sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
+        guard
+            let keyword = searchKeywordInput.text, !keyword.isEmpty,
+            let perPage = resultPerPageInput.text, !perPage.isEmpty
+            else {
+                self.searchButton.isEnabled = false
+                return
+            }
+        self.searchButton.isEnabled = true
+    }
+    
+    //MARK: - Segue Preparation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSearchResult" {
             let resultVC = segue.destination as! ResultViewController
@@ -70,18 +91,6 @@ extension SearchViewController: UITextFieldDelegate {
         default:
             textField.resignFirstResponder()
         }
-        
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard textField == searchKeywordInput else { return true }
-        let keywordLength = (textField.text?.count ?? 0) - range.length + string.count
-        
-//        guard textField == resultConfigPerPageInput else { return true }
-//        let perPageLength = (textField.text?.count ?? 0) - range.length + string.count
-        
-        searchButton.isEnabled = keywordLength > 0
         
         return true
     }

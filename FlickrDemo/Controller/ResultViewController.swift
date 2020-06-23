@@ -30,7 +30,6 @@ class ResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         searchPhotoManager.searchPhoto(keyword: self.keyword, perPage: self.perPage)
     }
-    
 
 }
 
@@ -61,14 +60,13 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     
-    
 }
 
 extension ResultViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
+        let padding = sectionInsets.left * (itemsPerRow + 1)
+        let calculatedWidth = view.frame.width - padding
+        let widthPerItem = calculatedWidth / itemsPerRow
 
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
