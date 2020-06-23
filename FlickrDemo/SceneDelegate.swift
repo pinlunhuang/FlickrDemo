@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  FlickrDemo
 //
-//  Created by Pinlun on 2020/6/22.
+//  Created by Pinlun on 2020/6/23.
 //  Copyright © 2020 pinlun. All rights reserved.
 //
 
@@ -53,4 +53,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
